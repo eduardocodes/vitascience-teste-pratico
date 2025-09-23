@@ -140,32 +140,32 @@ export default function Home() {
             </div>
 
             <div className="flex gap-4">
-              <button
-                onClick={handleGenerate}
-                disabled={isLoading}
-                className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {isLoading ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                    Analisando...
-                  </>
-                ) : (
-                  <>
-                    ✨ Gerar Análise
-                  </>
-                )}
-              </button>
+               <button
+                 onClick={handleGenerate}
+                 disabled={isLoading}
+                 className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 disabled:scale-100 cursor-pointer disabled:cursor-not-allowed flex items-center justify-center gap-2"
+               >
+                 {isLoading ? (
+                   <>
+                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                     Analisando...
+                   </>
+                 ) : (
+                   <>
+                     ✨ Gerar Análise
+                   </>
+                 )}
+               </button>
 
-              {apiResponse && (
-                <button
-                  onClick={clearResults}
-                  className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200"
-                >
-                  🗑️ Limpar
-                </button>
-              )}
-            </div>
+               {apiResponse && (
+                 <button
+                   onClick={clearResults}
+                   className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 cursor-pointer"
+                 >
+                   🗑️ Limpar
+                 </button>
+               )}
+             </div>
 
             {message && (
               <div className={`p-4 rounded-lg ${
