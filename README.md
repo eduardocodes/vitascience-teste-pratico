@@ -3,12 +3,11 @@
 ### Index
 
 - [Visão Geral](#-visão-geral)
-- [Arquitetura](#-arquitetura)
 - [Estrutura da Entrega](#-estrutura-da-entrega)
-- [Como Funciona](#-como-funciona)
+- [Arquitetura](#-arquitetura)
+- [Workflows](#-workflows)
 - [Documentação dos Prompts](#-documentação-dos-prompts)
 - [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
-- [Workflows](#-workflows)
 - [Validação e Testes](#-validação-e-testes)
 - [Como Rodar](#-como-rodar)
 - [Tecnologias e Ferramentas](#-tecnologias-e-ferramentas)
@@ -39,16 +38,29 @@ Objetivo: construir um sistema capaz de **analisar e melhorar leads de VSLs** se
 
 ```mermaid
 flowchart TD
-    A[Frontend Next.js] -->|Lead JSON| B[Webhook n8n]
-    B --> C[Orquestrador (Eugene Digital)]
+    A[Frontend Next.js] -->|Lead JSON + Email| B[Webhook n8n]
+    B --> C["Orquestrador (Eugene Digital)"]
+
+    %% Agentes conectados ao Orquestrador
     C --> D[Classificador de Consciência]
     C --> E[Editor de Conversão]
     C --> F[Gerador de Ângulos]
-    C --> G[Knowledge Search - Supabase]
-    C --> H[Web Search - Serper]
+
+    %% Todos os agentes têm acesso a ferramentas externas
+    D --> G[Knowledge Search - Supabase]
+    D --> H[Web Search - Serper]
+
+    E --> G
+    E --> H
+
+    F --> G
+    F --> H
+
+    %% Saída do fluxo
     C --> I[Structured Output Parser]
     I --> J[Email Formatter]
     J --> K[Send Email]
+
 ```
 
 ---
@@ -56,7 +68,7 @@ flowchart TD
 ## 🔄 Workflows
 
 ### 1. 📚 Vetorização do Livro (*Breakthrough Advertising*)
-![Workflow Vetorização](public/workflow-vetorizacao.png)
+![Workflow Vetorização](public/workflow-vetorizacao.jpg)
 
 - **Objetivo:** processar e armazenar o livro do Eugene Schwartz no banco vetorial (Supabase).  
 - **Passo a passo:**
@@ -71,7 +83,7 @@ flowchart TD
 ⚠️ Esse fluxo foi usado **apenas uma vez** para preparar a base vetorial.
 
 ### 2. 📨 Análise de Lead
-![Workflow Lead](public/workflow-lead.png)
+![Workflow Lead](public/workflow-lead.jpg)
 
 - **Objetivo:** receber uma **Lead de VSL** do frontend, passar pelos agentes de IA e retornar a análise final.  
 - **Passo a passo:**
@@ -193,9 +205,7 @@ $ npm run dev
 - [**LLM**](https://openrouter.ai/) → Deepseek-R1  
 - [**Supabase**](https://supabase.com/) → Banco de dados + armazenamento de embeddings  
 - [**OpenAI Embeddings**](https://openai.com/) → Vetorização do livro *Breakthrough Advertising*  
-- **Custom Tools:**  
-  - `knowledge_search` ([**Supabase**](https://supabase.com/)) → consulta ao vetor do livro  
-  - `web_search` ([**Serper**](https://serper.dev/)) → leitura de URLs explícitas da lead 
+- [**Serper**](https://serper.dev/) → Leitura de URLs explícitas da lead 
 
 ---
 
