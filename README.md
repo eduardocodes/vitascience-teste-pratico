@@ -10,6 +10,7 @@
 - [Estrutura do Banco de Dados](#-estrutura-do-banco-de-dados)
 - [Validação e Testes](#-validação-e-testes)
 - [Como Rodar](#-como-rodar)
+- [Demonstração](#-demonstração)
 - [Tecnologias e Ferramentas](#-tecnologias-e-ferramentas)
 
 ---
@@ -196,6 +197,11 @@ $ npm run dev
 3. Configure suas **credenciais** (APIs, banco de dados etc.).
 4. Coloque o fluxo em modo de produção, copie a URL do webhook gerado e defina essa URL como variável de ambiente no frontend.  
 ```
+
+---
+
+## 🎥 Demonstração
+- [Demonstração](https://www.loom.com/share/17f30222d83d453d96c8ecc3e6ed9f2b?sid=8c8647a8-48d2-42da-a0ca-4acda027f3f2)
 
 ---
 
