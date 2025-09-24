@@ -9,6 +9,15 @@ export default function Home() {
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<'success' | 'error'>('success')
 
+  // Função para lidar com Ctrl+A / Cmd+A
+  const handleSelectAll = (e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+      e.preventDefault()
+      const target = e.target as HTMLInputElement | HTMLTextAreaElement
+      target.select()
+    }
+  }
+
   const handleGenerate = async () => {
     if (!inputText.trim()) {
       setMessage('Por favor, insira algum texto antes de enviar.')
@@ -76,8 +85,8 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 p-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            🚀 Gerador de Lead
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 mt-12">
+            🧠 Clone Digital do Eugene Schwartz
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300">
             Analise e otimize seu conteúdo de marketing
@@ -96,6 +105,7 @@ export default function Home() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={handleSelectAll}
                 placeholder="seu@email.com"
                 className="w-full p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50"
                 disabled={isLoading}
@@ -110,6 +120,7 @@ export default function Home() {
                 id="lead-text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
+                onKeyDown={handleSelectAll}
                 placeholder="Cole aqui o texto que você deseja analisar..."
                 className="w-full h-32 p-4 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 disabled:opacity-50"
                 disabled={isLoading}
